@@ -1,0 +1,234 @@
+body {
+	margin: 0% !important;
+	padding: 0% !important;
+	background-color: #ececec !important;
+}
+/*start style for reg/auth*/
+#video-bg {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 1;
+    background: url(../media/image/bagr.jpg) no-repeat #94a233;
+    background-size: cover;
+}
+#video-bg > video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto; 
+}
+ @supports (object-fit: cover) {
+     #video-bg > video {
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+     }
+ }
+#reg, #auth {
+	float: left;
+	background-color: rgba(33, 226, 208, 0.41);	
+	margin: 0% 5% 0% 8%;
+	padding: 2% 0% 2% 0%;
+	border-radius: 8px;
+}
+#empty {
+	margin-left: 20%;
+}
+#reg button {
+	margin: 19% 0% 0% 0%;
+} 
+button {
+	border-radius: 10px;
+	float: left;
+	margin: 5% 0% 0% 6%;
+	background-color: rgba(33, 226, 208, 0.41);
+	font-size: 150%;
+	padding: 2% 4% 2% 4%;
+}
+button:hover {
+	background-color: inherit;
+}
+#title-reg {
+	margin: 0% 10% 1% 54.3%;
+}
+#title-auth {
+	margin: 0% 10% -4.5% 8%;
+}
+#h2 {
+	font-size: 180%;
+	margin: 0% 10% -4.5% -20% !important;
+	color: red;
+}
+#message {
+	position: absolute;
+	background-color: rgba(33, 226, 208, 0.41);
+	width: 50%;
+	color: #fff;
+	padding: 1% 2% 1% 2%;
+	margin: -9% 0% 5% 22%;
+	border-radius: 10px;
+}
+#container-reg-auth {
+	margin-top: 10%;
+}
+#success {
+	margin-left: 17%;
+}
+#h2-reg {
+	font-size: 180%;
+	margin: 0% 10% -4.5% 4% !important;
+	color: red;
+}
+#title-reg, #title-auth {
+	background-color: rgba(33, 226, 208, 0.41);
+	border-radius: 10px;
+	padding:0.5% 0% 0.5% 10%;
+	width: 33.3%;
+}
+#container-reg-auth input {
+	margin-bottom: 3%;
+}
+.form-reg-auth {
+	width: 60%;
+	float: left;
+}
+.li-form {
+	width: 40%;
+	float: left;
+}
+.li-form ul li {
+	color: #000;
+	padding-left: 12%;
+	width: 60%;
+	margin-bottom: 15%;
+	float: right;
+}
+/*end style for reg/auth*/
+/* start style for index*/
+#container {
+	/*background-color: #000;*/
+	margin: 0% auto 0% auto;
+}
+#header-index {
+	width: 100%;
+	background-color: #6363dd;
+	float: left;
+}
+#menu-index button, #but button {
+	background-color: #6363dd;
+	color: #fff;
+}
+#menu-index button {
+	color: 
+}
+#a-header, #user-heder-index{
+	text-decoration: none;
+	color: #fff;
+}
+#a-header:hover {
+	text-decoration: none;
+	color: #fff;
+}
+#user-heder-index span {
+	margin-left: 5%;
+}
+/* #menu-index button:hover{
+	position: absolute;
+	background-color: #6363dd;
+	margin-bottom: 15px;
+} */
+#menu-index {
+	width: 10%;
+	float: left;
+}
+#sub-header-index, #sub-header-index-2{
+	float: left;
+	padding: 1% 0% 1% 0%;
+}
+#serch-c {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC7SURBVDhPpdHNCkFBGIfxyUo2wkopKykrazvJJSBsLKTsXYKvlI+FJDbW7spl2HneedVxMjPpeOqX/yzO6TSMpzQKOn+vjRsOmOOKJbIINsEMKXuKquCOvD05qmGh01kJJ53fbZHT6W0D5z2c37+hOmjpjOf9pI96aOqMt0ZRpzf5B5y3XsZRp7Mq9jrddbFCxp6iGnhgbE+B6pDLu0C+RO5iihGeGCBRQ/z1AnlQXtC3pwTJgzudiTPmBboBF/R/auJmAAAAAElFTkSuQmCC);
+    background-position: 1%;
+	background-repeat: no-repeat;
+	outline: none;
+	margin: 5% 0% 5% 0%;
+	line-height: 170%;
+	width: 100%;
+}
+#search-header-index, #user-heder-index{
+	float: left;
+}
+#contacts-index, #message-index{
+	background-color: #fff;
+	padding-bottom: 10px;
+	height: 550px;
+	overflow: scroll;
+	overflow-x:hidden;
+}
+#contacts-index {
+	border-right: 2px solid #e3e3e3;
+}
+.img-contact-user {
+	border-radius: 25px;
+}
+.name-user-contact {
+	font-weight: bold;
+}
+.users {
+	margin-bottom: 2%;
+}
+.img-user-text {
+	float: right;
+}
+.text-user .text-user-center {
+	width: 75%;
+	float: left;
+}
+.text-user span {
+	width: 25%;
+	color: #969696;
+	float: left;
+}
+.row-text {
+	padding:1% 0% 1% 0%;
+}
+.send-div {
+
+	bottom: 20px;
+	width: 100%;
+	margin-left: 5% !important;
+	background-color: #fff;
+	padding: 1% 0% 1% 0%;
+}
+#br {
+	height: 130px;
+}
+.date {
+	margin: 1% 0% 1% 30%;
+}
+#text-w {
+	width: 70%;
+}
+.usr {
+	margin: 0% 15% 0% 15%;
+	border-radius: 25px;
+}
+.send-div button {
+	border: none;
+	background-color: initial;
+	margin: 0% 0% 0% 10%;
+}
+.send-div button:hover {
+	border: none;
+	background-color: initial;
+	cursor: pointer;
+	margin: 0% 0% 0% 10%;
+}
+/* end style for index*/
