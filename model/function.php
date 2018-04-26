@@ -18,7 +18,7 @@
 
 	function createUser($login, $pass, $email){
 		global $pdo;
-		$sql = "INSERT INTO `user` (`id`, `f_name`, `l_name`, `login`, `pass`, `email`, `image`, `about`) VALUES (NULL, 'edf', 'qwd', :login, :pass, :email, 'no-image.jpg', 'wefw');";
+		$sql = "INSERT INTO `user` (`id`, `name`, `login`, `pass`, `email`, `image`, `about`) VALUES (NULL, '0', :login, :pass, :email, 'no-image.jpg', '0');";
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindParam(':login', $login, PDO::PARAM_STR);
 		$stmt->bindParam(':pass', $pass, PDO::PARAM_STR);

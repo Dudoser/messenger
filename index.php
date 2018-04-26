@@ -1,6 +1,12 @@
 <?php
 	session_start();
 	header('Content-type: text/html; charset=utf-8');
+
+	var_dump($_SESSION);
+
+	if(empty($_SESSION)) {
+		header("location: /reg-auth.php");
+	}
 /*
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);*/
@@ -54,7 +60,7 @@
 						<ul class="dropdown-menu">
 					 		<li><a href="#">num1</a></li>
 					 		<li><a href="#">num2</a></li>
-					 		<li><a href="#">num3</a></li>
+					 		<li><a href="#"><a href="handlers/exit.php">Выход</a></a></li>
 						</ul>
 					</div>
 				</div>

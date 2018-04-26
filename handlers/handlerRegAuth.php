@@ -43,8 +43,7 @@ ini_set('display_errors', 1);*/
 			}
 			else {
 				$_SESSION['id'] = $user[0]['id'];
-				$_SESSION['f_name'] = $user[0]['f_name'];
-				$_SESSION['l_name'] = $user[0]['l_name'];
+				$_SESSION['name'] = $user[0]['name'];
 				$_SESSION['login'] = $user[0]['login'];
 				$_SESSION['pass'] = $user[0]['pass'];
 				$_SESSION['email'] = $user[0]['email'];
@@ -92,6 +91,7 @@ ini_set('display_errors', 1);*/
 			else {
 				
 				$create = createUser($loginReg, $passReg, $emailReg);
+				var_dump($create);
 				if ($create) {
 					$_SESSION['success'] = "Спасибо за регистрацию!";
 					header("location: ../reg-auth.php");
