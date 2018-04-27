@@ -200,12 +200,18 @@ button:hover {
 	padding:1% 0% 1% 0%;
 }
 .send-div {
-
-	bottom: 20px;
-	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	/*position: absolute;*/
+	/*bottom: 0px;*/
+	bottom: 63px;
+	width: 40%;
 	margin-left: 5% !important;
 	background-color: #fff;
 	padding: 1% 0% 1% 0%;
+}
+#spac {
+	height: 50px;
 }
 #br {
 	height: 130px;
@@ -215,6 +221,7 @@ button:hover {
 }
 #text-w {
 	width: 70%;
+	resize: none;
 }
 .usr {
 	margin: 0% 15% 0% 15%;

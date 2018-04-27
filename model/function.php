@@ -18,13 +18,40 @@
 
 	function createUser($login, $pass, $email){
 		global $pdo;
-		$sql = "INSERT INTO `user` (`id`, `name`, `login`, `pass`, `email`, `image`, `about`) VALUES (NULL, '0', :login, :pass, :email, 'no-image.jpg', '0');";
+		$sql = "INSERT INTO `user` (`id`, `name`, `login`, `pass`, `email`, `image`, `about`) VALUES (NULL, 'empty', :login, :pass, :email, 'no-image.jpg', 'empty');";
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindParam(':login', $login, PDO::PARAM_STR);
 		$stmt->bindParam(':pass', $pass, PDO::PARAM_STR);
 		$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 		$stmt->execute();
 		return true;
+	}
+
+	function getContact ($id) {
+		global $pdo;
+		$stmt = $pdo->prepare('SELECT contact FROM user WHERE id = ?');
+		$stmt->execute([$id]);
+		return $stmt->fetchAll();
+	}
+
+	function getContactUser ($arr) {
+		global $pdo;
+		// $flag = '';
+
+		
+		/*for ($i=0; $i < count($arr); $i++) { 
+			$flag.= ',?';	
+		}*/
+
+		// $flag = substr($flag, 1);
+		$flag  = str_repeat('?,', count($arr) - 1) . '?';
+		$sql = "SELECT id, login, name, image FROM user WHERE login IN ($flag)";
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute($arr);
+
+		// die($stmt);
+
+		return $stmt->fetchAll();
 	}
 
 

@@ -2,14 +2,13 @@
 	session_start();
 	header('Content-type: text/html; charset=utf-8');
 
-	var_dump($_SESSION);
-
 	if(empty($_SESSION)) {
 		header("location: /reg-auth.php");
 	}
-/*
+
 	error_reporting(E_ALL);
-	ini_set('display_errors', 1);*/
+	ini_set('display_errors', 1);
+	require_once "handlers/handlerIndex.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +46,18 @@
 				</div>
 			</div>
 			<div id="sub-header-index-2" class="col-md-8 col-lg-8 col-sm-8 col-xl-8">
-				<div id="user-heder-index" class="col-md-5 col-lg-5 col-sm-5 col-xl-5"><span>Gleb</span> <span>Онлайн</span></div>
+				<div id="user-heder-index" class="col-md-5 col-lg-5 col-sm-5 col-xl-5">
+				<span>
+					<?php  
+						if ($_SESSION['name'] == 'empty') {
+							echo $_SESSION['login'];
+						}
+						else {
+							echo $_SESSION['name'];
+						}
+					?>
+					
+				</span> <span>Онлайн</span></div>
 				<div id="search-header-index" class="col-md-5 col-lg-5 col-sm-5 col-xl-5">
 					<input type="text" name="search" placeholder="Поиск" />
 				</div>
@@ -75,249 +85,40 @@
 					</div>
 				</div>
 				<div id="contacts-content">
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
+					<?php for($i = 0; $i < count($contact); $i++) : ?>
+						<div class="row users">
+							<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
+								<img class="img-contact-user" src="media/image/user/<?= $contact[$i]['image'] ?>" width="50" height="50">
+							</div>
+							<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
+								<div class="name-user-contact"><?= $contact[$i]['name'] ?></div>
+								<!-- <div>Тут последнее сообще...</div> -->
+							</div>
 						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
-					<div class="row users">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="name-user-contact">Vlad babin</div>
-							<div>Тут последнее сообще...</div>
-						</div>
-					</div>
+					<?php endfor;?>
 				</div>
 			</div>
 			<div id="message-index" class="col-md-8 col-lg-8 col-sm-8 col-xl-8">
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
+				<?php for ($i = 0; $i < count($messages); $i++) :?>
+					<div class="row row-text">
+						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
+							<div class="img-user-text">
+								<img class="img-contact-user" src="media/image/user/<?= $messages[$i][2]['image']?>" width="50" height="50">
+							</div>
+						</div>
+						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
+							<div class="text-user">
+								<div class="name-user-contact"><?= $messages[$i][0]['name']?></div>
+								<div class="text-user-center"><?= $messages[$i][1]['text']?></div>
+								<span><?= $messages[$i][4]['time']?></span>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="date col-md-12 col-lg-12 col-sm-12 col-xl-12"><---------- за 05.02.2018 ----------></div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
-				<div class="row row-text">
-					<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-						<div class="img-user-text">
-							<img class="img-contact-user" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50">
-						</div>
-					</div>
-					<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-						<div class="text-user">
-							<div class="name-user-contact">Vlad babin</div>
-							<div class="text-user-center">Тут последнее сообще...</div>
-							<span>22:05:34</span>
-						</div>
-					</div>
-				</div>
+				<?php endfor; ?>
+
+				<!-- <div class="date col-md-12 col-lg-12 col-sm-12 col-xl-12"><---------- за 05.02.2018</div> -->
+
+				<div id="spac"></div>
 				<div class="row send-div">
 					<a href="#"><img class="usr" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50"></a>
 					<textarea id="text-w"></textarea>
