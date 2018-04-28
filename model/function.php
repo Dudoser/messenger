@@ -54,6 +54,15 @@
 		return $stmt->fetchAll();
 	}
 
+	function findUser ($login) {
+		global $pdo;
+		$sql = "SELECT id, login, name, image FROM user WHERE login = ?";
+		$stmt = $pdo->prepare($sql);
+		$stmt->execute([$login]);
+
+		return $stmt->fetchAll();
+	}
+
 
 
 /*	function getUserEmail($mail, $login) {

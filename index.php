@@ -13,13 +13,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>messenger</title>
+	<title>messenger | <?= $_SESSION['name']?></title>
 	<link rel="stylesheet" type="text/css" href="/style/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
-	<script src="scripts/script.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
 </head>
 <body>
 	<div class="col-md-9 col-lg-9 col-sm-12" id="container">
@@ -81,52 +81,61 @@
 			<div id="contacts-index" class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
 				<div class="row">
 					<div id="search-content" class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
-						<input id="serch-c" type="text" name="search-content" placeholder="       Поиск" />
+						<form name="form-searc-contact" method="POST">
+							<input id="serch-c" type="text" name="search-content" placeholder="       Поиск" />
+						</form>
 					</div>
 				</div>
 				<div id="contacts-content">
 					<?php for($i = 0; $i < count($contact); $i++) : ?>
-						<div class="row users">
-							<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-								<img class="img-contact-user" src="media/image/user/<?= $contact[$i]['image'] ?>" width="50" height="50">
+							<div class="row users">
+								<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
+									<img class="img-contact-user" src="media/image/user/<?= $contact[$i]['image'] ?>" width="50" height="50">
+								</div>
+								<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
+									<div class="name-user-contact" value="<?= $contact[$i]['login']?>" ><?= $contact[$i]['name'] ?></div>
+									<!-- <div>Тут последнее сообще...</div> -->
+								</div>
 							</div>
-							<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-								<div class="name-user-contact"><?= $contact[$i]['name'] ?></div>
-								<!-- <div>Тут последнее сообще...</div> -->
-							</div>
-						</div>
 					<?php endfor;?>
 				</div>
 			</div>
 			<div id="message-index" class="col-md-8 col-lg-8 col-sm-8 col-xl-8">
-				<?php for ($i = 0; $i < count($messages); $i++) :?>
-					<div class="row row-text">
-						<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-							<div class="img-user-text">
-								<img class="img-contact-user" src="media/image/user/<?= $messages[$i][2]['image']?>" width="50" height="50">
+				<?php if (!empty($messages)) :?>
+					<div id="information"></div>
+					<?php for ($i = 0; $i < count($messages); $i++) :?>
+						<div class="row row-text">
+							<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
+								<div class="img-user-text">
+									<img class="img-contact-user" src="media/image/user/<?= $messages[$i][2]['image']?>" width="50" height="50">
+								</div>
+							</div>
+							<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
+								<div class="text-user">
+									<div class="name-user-contact"><?= $messages[$i][0]['name']?></div>
+									<div class="text-user-center"><?= $messages[$i][1]['text']?></div>
+									<span><?= $messages[$i][4]['time']?></span>
+								</div>
 							</div>
 						</div>
-						<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-							<div class="text-user">
-								<div class="name-user-contact"><?= $messages[$i][0]['name']?></div>
-								<div class="text-user-center"><?= $messages[$i][1]['text']?></div>
-								<span><?= $messages[$i][4]['time']?></span>
-							</div>
-						</div>
+					<?php endfor; ?>
+					<!-- <div class="date col-md-12 col-lg-12 col-sm-12 col-xl-12"><---------- за 05.02.2018</div> -->
+
+					<div id="spac"></div>
+					<div class="row send-div">
+						<form method="POST" id="form-send-message">
+							<a href="#"><img class="usr" src="media/image/user/<?= $_SESSION['image']?>" width="50" height="50"></a>
+							<textarea id="text-w" name="text"></textarea>
+							<a href="#"><img class="usr" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50"></a>
+							<button type="submit" name="done">Отправить</button>
+						</form>
 					</div>
-				<?php endfor; ?>
-
-				<!-- <div class="date col-md-12 col-lg-12 col-sm-12 col-xl-12"><---------- за 05.02.2018</div> -->
-
-				<div id="spac"></div>
-				<div class="row send-div">
-					<a href="#"><img class="usr" src="media/image/user/mujskie_avatarki-5.png" width="50" height="50"></a>
-					<textarea id="text-w"></textarea>
-					<a href="#"><img class="usr" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50"></a>
-					<button>Отправить</button>
-				</div>
+				<?php else: ?>
+					
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
+	<script src="scripts/script.js"></script>
 </body>
 </html>
