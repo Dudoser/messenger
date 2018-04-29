@@ -46,7 +46,7 @@
 	}
 
 
-	/*$passMessage = '/var/www/messenger.loc/messages/' . $_SESSION['login'] . '_' . $contact[0]['login'] . '.txt';
+	$passMessage = '/var/www/messenger.loc/messages/' . $_SESSION['login'] . '_' . $contact[0]['login'] . '.txt';
 
 	if (!is_file($passMessage)) {
 		$passMessage = '/var/www/messenger.loc/messages/' . $contact[0]['login'] . '_' . $_SESSION['login'] . '.txt';
@@ -63,7 +63,7 @@
 			$messages[$i][$j] = explode('-', $messages[$i][$j]);
 			$messages[$i][$j] = [$messages[$i][$j][0] => $messages[$i][$j][1]];
 		}
-	}*/
+	}
 
 	// var_dump($messages[1][1]);
 

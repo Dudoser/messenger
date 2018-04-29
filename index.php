@@ -101,38 +101,40 @@
 				</div>
 			</div>
 			<div id="message-index" class="col-md-8 col-lg-8 col-sm-8 col-xl-8">
-				<?php if (!empty($messages)) :?>
-					<div id="information"></div>
-					<?php for ($i = 0; $i < count($messages); $i++) :?>
-						<div class="row row-text">
-							<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
-								<div class="img-user-text">
-									<img class="img-contact-user" src="media/image/user/<?= $messages[$i][2]['image']?>" width="50" height="50">
+				<div class="message-content">
+					<?php if (!empty($messages)) :?>
+						<div id="information"></div>
+						<?php for ($i = 0; $i < count($messages); $i++) :?>
+							<div class="row row-text">
+								<div class="col-md-3 col-lg-3 col-sm-3 col-xl-3">
+									<div class="img-user-text">
+										<img class="img-contact-user" src="media/image/user/<?= $messages[$i][2]['image']?>" width="50" height="50">
+									</div>
+								</div>
+								<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
+									<div class="text-user">
+										<div class="name-user-contact"><?= $messages[$i][0]['name']?></div>
+										<div class="text-user-center"><?= $messages[$i][1]['text']?></div>
+										<span><?= $messages[$i][4]['time']?></span>
+									</div>
 								</div>
 							</div>
-							<div class="col-md-9 col-lg-9 col-sm-9 col-xl-9">
-								<div class="text-user">
-									<div class="name-user-contact"><?= $messages[$i][0]['name']?></div>
-									<div class="text-user-center"><?= $messages[$i][1]['text']?></div>
-									<span><?= $messages[$i][4]['time']?></span>
-								</div>
-							</div>
-						</div>
-					<?php endfor; ?>
-					<!-- <div class="date col-md-12 col-lg-12 col-sm-12 col-xl-12"><---------- за 05.02.2018</div> -->
+						<?php endfor; ?>
+						<!-- <div class="date col-md-12 col-lg-12 col-sm-12 col-xl-12"><---------- за 05.02.2018</div> -->
 
-					<div id="spac"></div>
-					<div class="row send-div">
-						<form method="POST" id="form-send-message">
-							<a href="#"><img class="usr" src="media/image/user/<?= $_SESSION['image']?>" width="50" height="50"></a>
-							<textarea id="text-w" name="text"></textarea>
-							<a href="#"><img class="usr" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50"></a>
-							<button type="submit" name="done">Отправить</button>
-						</form>
-					</div>
-				<?php else: ?>
-					
-				<?php endif; ?>
+						<div id="spac"></div>
+						<div class="row send-div">
+							<form method="POST" id="form-send-message">
+								<a href="#"><img class="usr" src="media/image/user/<?= $_SESSION['image']?>" width="50" height="50"></a>
+								<textarea id="text-w" name="text"></textarea>
+								<a href="#"><img class="usr" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50"></a>
+								<button type="button" name="done">Отправить</button>
+							</form>
+						</div>
+					<?php else: ?>
+						
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 	</div>
