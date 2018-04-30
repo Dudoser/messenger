@@ -12,15 +12,25 @@
 	$parseToJs = json_encode($contact);
 
 
-
-	if (isset($_POST['ajax_for_message'])) {
+	if (isset($_POST['ajax_for_message']) || isset($_POST['isAjax'])) {
+		// unset($_POST['ajax_for_message']);
 		$passMessage = '/var/www/messenger.loc/messages/' . $_SESSION['login'] . '_' . $_POST['login'] . '.txt';
 
 		if (!is_file($passMessage)) {
 			$passMessage = '/var/www/messenger.loc/messages/' . $_POST['login'] . '_' . $_SESSION['login'] . '.txt';
 		}
+
+
+		for ($i=0; $i < count($contact); $i++) { 
+			if ($contact[$i]['login'] == $_POST['login']) {
+				$image = $contact[$i]['image'];
+			}
+		}
+
 		if (!is_file($passMessage)) {
-			$parseMessage = json_encode("empty");
+
+			$messages = ["empty", $_SESSION['image'], $image];
+			$parseMessage = json_encode($messages);
 		    header("Content-type: application/json");
 		    print($parseMessage);
 		    exit();
@@ -38,6 +48,37 @@
 				$messages[$i][$j] = [$messages[$i][$j][0] => $messages[$i][$j][1]];
 			}
 		}
+
+		if (isset($_POST['ajaxSendMessage'])) {
+
+			// var_dump("1231231313131123123");
+
+			// unset($_POST['ajaxSendMessage']);
+		// if (isset($_POST['done'])) {
+
+
+			// die("dfew");
+			$text = $_POST['text'];
+
+			// die();
+			$text = validStr($text, true);
+
+			$string =	';name-' . $_SESSION['name'] . 
+						',text-' . $_POST['text'] . 
+						',image-' . $_SESSION['image'] . 
+						',date-' . date('Y.m.d') . 
+						',time-' . date('H:i:s');
+
+			$newMessage = fopen($passMessage, 'a');
+			$writingMessage = fwrite($newMessage, $string);
+			fclose($newMessage);
+
+		// }
+		}
+		// var_dump("dfgbrtgrtrtbdsbd");
+
+		$a = [$_SESSION['image'], $image];
+		array_push($messages, $a);
 
 		$parseMessage = json_encode($messages);
 	    header("Content-type: application/json");
@@ -65,27 +106,15 @@
 		}
 	}
 
+	/*$a = [$_SESSION['login'], $_SESSION['image']];
+	array_push($messages, $a);
+	var_dump($messages);
+	die();*/
+
 	// var_dump($messages[1][1]);
 
 	// var_dump(date('Y.m.d.H:i:s'));
 
-	if (isset($_POST['done'])) {
-
-		$text = $_POST['text'];
-
-		$text = validStr($text, true);
-
-		$string =	';name-' . $_SESSION['name'] . 
-					',text-' . $text . 
-					',image-' . $_SESSION['image'] . 
-					',date-' . date('Y.m.d') . 
-					',time-' . date('H:i:s');
-
-		$newMessage = fopen($passMessage, 'a');
-		$writingMessage = fwrite($newMessage, $string);
-		fclose($newMessage);
-		// var_dump($a);
-	}
 
 	if (isset($_POST['search-content'])) {
 		$searchQuery = validStr($_POST['search-content']);

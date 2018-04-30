@@ -125,10 +125,10 @@
 						<div id="spac"></div>
 						<div class="row send-div">
 							<form method="POST" id="form-send-message">
-								<a href="#"><img class="usr" src="media/image/user/<?= $_SESSION['image']?>" width="50" height="50"></a>
+								<a href="#"><img class="usr" id="myImg" src="media/image/user/<?= $_SESSION['image']?>" width="50" height="50"></a>
 								<textarea id="text-w" name="text"></textarea>
-								<a href="#"><img class="usr" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50"></a>
-								<button type="button" name="done">Отправить</button>
+								<a href="#"><img class="usr" id="friendImg" src="media/image/user/1426228433_iv6tzpo0bia.jpg" width="50" height="50"></a>
+								<button type="button" class="send-button" name="done">Отправить</button>
 							</form>
 						</div>
 					<?php else: ?>

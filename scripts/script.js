@@ -5,10 +5,10 @@ $(document).ready(function() {
 
 	ob.empty();
 
-	function divForSendMessage () {
+	function divForSendMessage (yourImage, friendImage) {
 
-		var path1 = 'media/image/user/2';
-		var path2 = 'media/image/user/3';
+		var path1 = 'media/image/user/' + yourImage;
+		var path2 = 'media/image/user/' + friendImage;
 
 
 		var div = document.createElement('div');
@@ -25,7 +25,8 @@ $(document).ready(function() {
 		var img1 = document.createElement('img');
 		$(img1).addClass('usr');
 		$(img1).attr({
-			src: path1, 
+			src: path1,
+			id: "myImg", 
 			width: "50",
 			height: "50"
 		});
@@ -49,7 +50,8 @@ $(document).ready(function() {
 		var button = document.createElement('button');
 		$(button).attr({
 			type: "button",
-			name: "done"
+			name: "done",
+			class: "send-button"
 		});
 		$(button).html('Отправить');
 
@@ -84,6 +86,8 @@ $(document).ready(function() {
 
 		// console.log(data[0][0]['name']);
 		// console.log(data[0]);
+
+		// console.log(data);
 
 		// for (var i = 0; i < data.length; i++) {
 
@@ -143,13 +147,13 @@ $(document).ready(function() {
 		return div;
 	}
 
+	/*function sendMessage() {
+		console.log("123213123131312312");
+	}*/
+
 	// console.log(divForMessage());
 
-	$(".name-user-contact").bind("click", function (){
-
-		var login = this.getAttribute("value");
-		// console.log(login);
-
+	function rendsrMessages(login) {
 		$.ajax({
 			url: '',
 			type: 'post',
@@ -158,20 +162,98 @@ $(document).ready(function() {
 				ajax_for_message: 1
 			},
 			success: function (data) {
+
     			// console.log(data);
-    			for (var i = 0; i < data.length; i++) {
-    				var div = divForMessage(data[i], login);
-    				console.log(div);
-    				ob.append(div);
+
+    			if (data[0] == "empty") {
+    				ob.empty();
+    				ob.append(spac());
+	    			ob.append(divForSendMessage(data[1],data[2]));
     			}
-    			ob.append(spac());
-    			ob.append(divForSendMessage());
+    			else {
+    				ob.empty();
+	    			for (var i = 0; i < data.length - 1; i++) {
+	    				var div = divForMessage(data[i], login);
+	    				// console.log(div);
+	    				ob.append(div);
+	    			}
+	    			// console.log(div);
+	    			ob.append(spac());
+	    			ob.append(divForSendMessage(data[data.length-1][0],data[data.length-1][1]));
+
+					$('#message-index').scrollTop(100000);
+    			}
+    			
 			},
 			error: function (data) {
 				console.log("error");
 			}
 		});
+		return ob;
+	}
+	$(".name-user-contact").bind("click", function (){
+
+		var login = this.getAttribute("value");
+		// console.log(login);
+		ob.html(rendsrMessages(login));
+		
 	});
+
+
+	// console.log($('.message-content').html());
+
+	function sec() {
+		var areaMessages = $('.message-content').html();
+		if (areaMessages == '') {
+			console.log("123");
+			setTimeout(sec, 1000);
+		}
+		else {
+			console.log("win");	
+			$(".send-button").bind("click", function (){
+
+				var text = $('#text-w').val();
+				$('#text-w').val('');
+
+				// console.log(text);
+
+				var login = "<?= $_SESSION['login']?>";
+
+				$.ajax({
+					url: '',
+					type: 'post',
+					data: {
+						text: text,
+						isAjax: 1,
+						ajaxSendMessage: 1
+					},
+					success: function (data) {
+						ob.empty();
+		    			for (var i = 0; i < data.length - 1; i++) {
+		    				var div = divForMessage(data[i], login);
+		    				// console.log(div);
+		    				ob.append(div);
+		    			}
+		    			// console.log(div);
+		    			ob.append(spac());
+		    			ob.append(divForSendMessage(data[data.length-1][0],data[data.length-1][1]));
+
+						$('#message-index').scrollTop(100000);
+					},
+					error: function (data) {
+						console.log("errorSend");
+					}
+				});
+			});
+		}
+	}
+	
+	setTimeout(sec, 1000);
+
+	
+	  
+
+	
 
 
 
