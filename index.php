@@ -59,7 +59,7 @@
 					
 				</span> <span>Онлайн</span></div>
 				<div id="search-header-index" class="col-md-5 col-lg-5 col-sm-5 col-xl-5">
-					<input type="text" name="search" placeholder="Поиск" />
+					<input type="text" id="searchU" name="search" placeholder="Поиск" />
 				</div>
 				<div id="menu-index" class="col-md-2 col-lg-2 col-sm-2 col-xl-2">
 					<div class="dropdown" >

@@ -82,14 +82,17 @@ $(document).ready(function() {
 	/*
 	* function for generate div for render messages
 	*/
-	function divForMessage (data, login) {
+	function divForMessage (data, login, text) {
 
-		// console.log(data[0][0]['name']);
-		// console.log(data[0]);
+		// console.log(data);
 
 		// console.log(data);
 
 		// for (var i = 0; i < data.length; i++) {
+
+
+			// var text = JSON.parse(data[1]["text"]);	
+			// 	console.log(text);
 
 			var name = data[0]['name'];
 			var text = data[1]['text'];
@@ -173,7 +176,7 @@ $(document).ready(function() {
     			else {
     				ob.empty();
 	    			for (var i = 0; i < data.length - 1; i++) {
-	    				var div = divForMessage(data[i], login);
+	    				var div = divForMessage(data[i], login, false);
 	    				// console.log(div);
 	    				ob.append(div);
 	    			}
@@ -193,45 +196,42 @@ $(document).ready(function() {
 	}
 	$(".name-user-contact").bind("click", function (){
 
-		var login = this.getAttribute("value");
+		window.login = this.getAttribute("value");
 		// console.log(login);
 		ob.html(rendsrMessages(login));
 		
 	});
 
-
-	// console.log($('.message-content').html());
-
 	function sec() {
 		var areaMessages = $('.message-content').html();
 		if (areaMessages == '') {
-			console.log("123");
 			setTimeout(sec, 1000);
 		}
 		else {
-			console.log("win");	
 			$(".send-button").bind("click", function (){
+
+				// console.log("123");
 
 				var text = $('#text-w').val();
 				$('#text-w').val('');
 
 				// console.log(text);
 
-				var login = "<?= $_SESSION['login']?>";
+				var login = window.login;
 
 				$.ajax({
 					url: '',
 					type: 'post',
 					data: {
 						text: text,
+						login: login,
 						isAjax: 1,
 						ajaxSendMessage: 1
 					},
 					success: function (data) {
 						ob.empty();
 		    			for (var i = 0; i < data.length - 1; i++) {
-		    				var div = divForMessage(data[i], login);
-		    				// console.log(div);
+		    				var div = divForMessage(data[i], login, true);
 		    				ob.append(div);
 		    			}
 		    			// console.log(div);
@@ -240,8 +240,8 @@ $(document).ready(function() {
 
 						$('#message-index').scrollTop(100000);
 					},
-					error: function (data) {
-						console.log("errorSend");
+					error: function (data, textStatus) {
+						console.log( [ data.status, textStatus ] );
 					}
 				});
 			});
@@ -250,6 +250,45 @@ $(document).ready(function() {
 	
 	setTimeout(sec, 1000);
 
+	$("#searchU").bind("click", function(){
+		var searchU = $("#searchU").html();
+
+		$.ajax({
+			url: '',
+			type: 'post',
+			data: {
+				search: searchU,
+				ajax_for_search: 1
+			},
+			success: function (data) {
+
+    			// console.log(data);
+
+    			if (data[0] == "empty") {
+    				ob.empty();
+    				ob.append(spac());
+	    			ob.append(divForSendMessage(data[1],data[2]));
+    			}
+    			else {
+    				ob.empty();
+	    			for (var i = 0; i < data.length - 1; i++) {
+	    				var div = divForMessage(data[i], login, false);
+	    				// console.log(div);
+	    				ob.append(div);
+	    			}
+	    			// console.log(div);
+	    			ob.append(spac());
+	    			ob.append(divForSendMessage(data[data.length-1][0],data[data.length-1][1]));
+
+					$('#message-index').scrollTop(100000);
+    			}
+    			
+			},
+			error: function (data) {
+				console.log("error");
+			}
+		});
+	});
 	
 	  
 
